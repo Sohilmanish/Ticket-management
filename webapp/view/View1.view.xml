@@ -1,0 +1,197 @@
+<mvc:View controllerName="com.manish.ticketmanagement.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+	xmlns:ui="sap.ui.table"
+	xmlns:unified="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:svm="sap.ui.comp.smartvariants">
+   <f:DynamicPage headerExpanded="Standard">
+		<f:title>
+			<f:DynamicPageTitle title="name" heading="manish" >
+				<f:heading>
+					<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
+				</f:heading>
+				<f:expandedContent>
+				<Label id="expandedLabel" text="No filters active" />
+				</f:expandedContent>
+				<f:snappedContent>
+				<Label id="snappedLabel" text="No filters active" />
+				</f:snappedContent>
+                <f:heading>
+						<Title text="Standard" />
+				</f:heading>
+                <f:actions>
+			    <Button icon="sap-icon://action" type="Transparent"/>
+				</f:actions>
+			</f:DynamicPageTitle>
+			</f:title>
+	<f:header>
+
+	<f:DynamicPageHeader>
+		<f:content>
+
+		<fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+
+		<fb:filterGroupItems>
+		            
+					<fb:FilterGroupItem name="Name"  groupName="Group1" visibleInFilterBar="true">
+						<fb:control>
+							<SearchField width="100%" search=".onSearch" />
+						</fb:control>
+					</fb:FilterGroupItem>
+
+
+					<fb:FilterGroupItem name="Status" label="Status" groupName="Group1" 
+                                        visibleInFilterBar="true">
+						<fb:control>
+						<MultiComboBox  name="Status" selectionChange=".onSelectionChange"
+										items="{ path: '/ProductCategories',templateShareable: true}">
+										<core:Item key="{key}" text="{name}"/>
+						</MultiComboBox>
+						</fb:control>
+				    </fb:FilterGroupItem>
+					<fb:FilterGroupItem name="Ticket ID" label="Ticket ID" groupName="Group1" 
+                                        visibleInFilterBar="true">
+						<fb:control>
+							<Input 
+									id="productInput"
+									placeholder="Enter Ticket"
+									showSuggestion="true"
+									showValueHelp="true"
+									valueHelpRequest=".onValueHelpRequest"
+									suggestionItems="{/ProductCollection}">
+									<suggestionItems>
+										<core:Item text="{Name}" />
+									</suggestionItems>
+								</Input>
+						</fb:control>
+		            </fb:FilterGroupItem>
+                    <fb:FilterGroupItem name="Material" label="Material" groupName="Group1" visibleInFilterBar="true">
+						<fb:control>
+						<MultiComboBox name="Material" selectionChange=".nSelectionChange"
+										items="{ path: '/ProductNames', templateShareable: true}" >
+										<core:Item key="{key}" text="{name}"/>
+						</MultiComboBox>
+						</fb:control>
+					</fb:FilterGroupItem>
+
+
+					<fb:FilterGroupItem name="Exchange Partner" label="Exchange Partner" groupName="Group1" 
+                                        visibleInFilterBar="true">
+						<fb:control>
+						<MultiComboBox  name="Exchange Partner" selectionChange=".onSelectionChange"
+										items="{ path: '/ProductCategories',templateShareable: true}">
+										<core:Item key="{key}" text="{name}"/>
+						</MultiComboBox>
+						</fb:control>
+				    </fb:FilterGroupItem>
+					<fb:FilterGroupItem name="Processor" label="Processor" groupName="Group1" 
+                                        visibleInFilterBar="true">
+						<fb:control>
+						<MultiComboBox  name="Processor" selectionChange=".onSelectionChange"
+										items="{ path: '/ProductSuppliers', templateShareable: true }">
+										<core:Item key="{key}" text="{name}"/>
+						</MultiComboBox>
+						</fb:control>
+		            </fb:FilterGroupItem>
+                    <fb:FilterGroupItem name="Posting Mode" label="ProPosting Modecessor" groupName="Group1" 
+                                        visibleInFilterBar="true">
+						<fb:control>
+						<MultiComboBox  name="Posting Mode" selectionChange=".onSelectionChange"
+										items="{ path: '/ProductSuppliers', templateShareable: true }">
+										<core:Item key="{key}" text="{name}"/>
+						</MultiComboBox>
+						</fb:control>
+		            </fb:FilterGroupItem>
+                    <fb:FilterGroupItem name="Inventory Document " label="ProcInventory Document " groupName="Group1" 
+                                        visibleInFilterBar="true">
+						<fb:control>
+						<MultiComboBox  name="Inventory Document " selectionChange=".onSelectionChange"
+										items="{ path: '/ProductSuppliers', templateShareable: true }">
+										<core:Item key="{key}" text="{name}"/>
+						</MultiComboBox>
+						</fb:control>
+		            </fb:FilterGroupItem>
+		</fb:filterGroupItems>
+        </fb:FilterBar>
+	    </f:content>
+	</f:DynamicPageHeader>
+
+	</f:header>
+
+	<f:content>
+	 	<ui:Table
+					id="table"
+					rows="{/ProductCollection}"
+					selectionMode="MultiToggle"
+					setEnableGrouping="true"
+					ariaLabelledBy="title">
+				<ui:extension>
+					<!-- <OverflowToolbar style="Clear">
+						<Title id="title" text="Products"/>
+						<ToolbarSpacer/>
+						<Label text="SelectionMode:"/>
+						<Select id="select" selectedKey="MultiToggle" change="onSelectionModeChange">
+							<items>
+								<core:Item key="MultiToggle" text="MultiToggle"/>
+								<core:Item key="Single" text="Single"/>
+								<core:Item key="None" text="None"/>
+							</items>
+						</Select>
+						<ToggleButton text="Toggle Highlights" pressed="true" press="onHighlightToggle"/>
+						<ToggleButton text="Toggle Alternate Row Colors" press="onAlternateToggle"/>
+					</OverflowToolbar> -->
+				</ui:extension>
+				<ui:rowSettingsTemplate>
+					<ui:RowSettings highlight="{Status}" highlightText="{StatusText}"/>
+				</ui:rowSettingsTemplate>
+				<ui:columns>
+					<ui:Column sortProperty="Status" filterProperty="Status">
+						<Label text="Status"/>
+						<ui:template>
+							<Text text="{Status}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="Ticket ID"/>
+						<ui:template>
+							<Text text="{Name}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="Creation Date"/>
+						<ui:template>
+							<Text text="{ProductId}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column hAlign="End">
+						<Label text="Created By"/>
+						<ui:template>
+							<Text text="{Quantity}" wrapping="false"/>
+						</ui:template>
+					</ui:Column>
+					<ui:Column>
+						<Label text="Priority"/>
+						<ui:template>
+							<unified:Currency value="{Price}" currency="{CurrencyCode}"/>
+						</ui:template>
+					</ui:Column>
+
+					<ui:Column>
+						<Label text="Assigned To"/>
+						<ui:template>
+							<unified:Currency value="{Price}" currency="{CurrencyCode}"/>
+						</ui:template>
+					</ui:Column>
+
+				</ui:columns>
+			</ui:Table>	
+
+			
+	</f:content>
+
+	</f:DynamicPage>
+</mvc:View>
