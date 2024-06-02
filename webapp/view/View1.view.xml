@@ -8,6 +8,7 @@
     xmlns:f="sap.f"
 	xmlns:fb="sap.ui.comp.filterbar"
 	xmlns:svm="sap.ui.comp.smartvariants">
+	<core: Fragment fragmentName="sap.training.exc.view.SimpleUiPart" type="XML" />
    <f:DynamicPage headerExpanded="Standard">
 		
 		<f:title>
@@ -72,6 +73,7 @@
 									placeholder="Enter Ticket"
 									showSuggestion="true"
 									showValueHelp="true"
+									press=".onSave"
 									valueHelpRequest=".onValueHelpRequest"
 									suggestionItems="{/ProductCollection}">
 									<suggestionItems>
@@ -142,7 +144,7 @@
     </f:header>
 
 	<f:content>
-	 	<ui:Table  id="table" rows="{P>oData}" selectionMode="MultiToggle" setEnableGrouping="true"
+	 	<ui:Table  id="Idtable" rows="{P>/}" selectionMode="MultiToggle" setEnableGrouping="true"
 					ariaLabelledBy="title">
 			<ui:extension>
 					<!-- <OverflowToolbar style="Clear">
@@ -162,7 +164,7 @@
 			</ui:extension>
 
 			<ui:rowSettingsTemplate>
-				<ui:RowSettings highlight="{P>/Status}" highlightText="{P>StatusText}"/>
+				<ui:RowSettings highlight="{P>/Status}" highlightText="{P>/StatusText}"/>
 			</ui:rowSettingsTemplate>
 
 			<ui:columns>
