@@ -1,4 +1,4 @@
-<!-- <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<SelectDialog
 		id="selectDialog"
 		title="Products"
@@ -13,8 +13,9 @@
 			title="{Name}"
 			description="{ProductId}" />
 	</SelectDialog>
-</core:FragmentDefinition> -->
-<core:FragmentDefinition
+</core:FragmentDefinition>
+
+<!-- <core:FragmentDefinition
   xmlns="sap.m"
   xmlns:core="sap.ui.core">
   <Dialog
@@ -29,4 +30,4 @@
           press=".onCloseDialog"/>
       </beginButton>
   </Dialog>
-</core:FragmentDefinition>
+</core:FragmentDefinition> -->

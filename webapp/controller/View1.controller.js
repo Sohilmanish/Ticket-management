@@ -1,9 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/syncStyleClass"
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter"
+    
 ],
-function (Controller,JSONModel,syncStyleClass) {
+function (Controller,JSONModel,Fragment,Filter) {
     "use strict";
 
     return Controller.extend("com.manish.ticketmanagement.controller.View1", {
@@ -139,54 +141,37 @@ function (Controller,JSONModel,syncStyleClass) {
                     "CreatedBy" : "lokendra Sir",
                     "Priority" :16,
                     "AssignedTo" : "Deloitte consulting Limited"
-                  },
+                  }
            ]
-            let this=that
+
             let oModel= new JSONModel()
             oModel.setData(oData)
-            that.getView().byId("Idtable").setModel(oModel,"P")
+            this.getView().byId("Idtable").setModel(oModel,"P")
         },
-
-        onSave: function () {
-          if (!this.pDialog) {
-            this.pDialog = this.loadFragment({
-              name: "sap.training.exc.view.Dialog"
+         
+        onValueHelpRequest: function (oEvent) {
+          var sInputValue = oEvent.getSource().getValue(),
+            oView = this.getView();
+    
+          if (!this._pValueHelpDialog) {
+            this._pValueHelpDialog = Fragment.load({
+              id: oView.getId(),
+              name: "com.manish.ticketmanagement.view.TicketId",
+              controller: this
             }).then(function (oDialog) {
-              syncStyleClass(this.getOwnerComponent().getContentDensityClass(), this.getView(), oDialog);
+              oView.addDependent(oDialog);
               return oDialog;
-            }.bind(this));
+            });
           }
-          this.pDialog.then(function (oDialog) {
-            oDialog.open();
+          this._pValueHelpDialog.then(function(oDialog) {
+            // Create a filter for the binding
+            // oDialog.getBinding("items").filter([new Filter("Name", FilterOperator.Contains, sInputValue)]);
+            // Open ValueHelpDialog filtered by the input's value
+            oDialog.open(sInputValue);
           });
         },
+        	
         
-        onCloseDialog: function () {
-          this.byId("dialog").close();
-        }
-
-
-      //   onValueHelpRequest: function (oEvent) {
-			// var sInputValue = oEvent.getSource().getValue(),
-			// 	oView = this.getView();
-
-			// if (!this._pValueHelpDialog) {
-			// 	this._pValueHelpDialog = Fragment.load({
-			// 		id: oView.getId(),
-			// 		name: "sap.m.sample.InputAssisted.ValueHelpDialog",
-			// 		controller: this
-			// 	}).then(function (oDialog) {
-			// 		oView.addDependent(oDialog);
-			// 		return oDialog;
-			// 	});
-			// }
-			// this._pValueHelpDialog.then(function(oDialog) {
-			// 	// Create a filter for the binding
-			// 	oDialog.getBinding("items").filter([new Filter("Name", FilterOperator.Contains, sInputValue)]);
-			// 	// Open ValueHelpDialog filtered by the input's value
-			// 	oDialog.open(sInputValue);
-		// 	});
-		// },
 
     });
 });

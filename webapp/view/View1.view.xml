@@ -8,7 +8,7 @@
     xmlns:f="sap.f"
 	xmlns:fb="sap.ui.comp.filterbar"
 	xmlns:svm="sap.ui.comp.smartvariants">
-	<core: Fragment fragmentName="sap.training.exc.view.SimpleUiPart" type="XML" />
+	<!-- <core: Fragment fragmentName="sap.training.exc.view.SimpleUiPart" type="XML" /> -->
    <f:DynamicPage headerExpanded="Standard">
 		
 		<f:title>
