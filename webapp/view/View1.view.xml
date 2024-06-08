@@ -74,7 +74,7 @@
 									showSuggestion="true"
 									showValueHelp="true"
 									press=".onSave"
-									valueHelpRequest=".onValueHelpRequest"
+									valueHelpRequest=".onValueHelpRequestTicket"
 									suggestionItems="{/ProductCollection}">
 									<suggestionItems>
 										<core:Item text="{Name}" />
@@ -92,8 +92,6 @@
 									showFooter="true"/>
 						</fb:control>
 					</fb:FilterGroupItem>
-
-
 					<fb:FilterGroupItem name="Created By" label="Created By" groupName="Group1" 
                                         visibleInFilterBar="true">
 						<fb:control>
@@ -120,7 +118,7 @@
 									placeholder="Enter Ticket"
 									showSuggestion="true"
 									showValueHelp="true"
-									valueHelpRequest=".onValueHelpRequest"
+									valueHelpRequest=".onValueHelpRequestAssignedTo"
 									suggestionItems="{/ProductCollection}">
 									<suggestionItems>
 										<core:Item text="{Name}" />
@@ -128,15 +126,6 @@
 								</Input>
 						</fb:control>
 		            </fb:FilterGroupItem>
-                    <!-- <fb:FilterGroupItem name="Inventory Document " label="ProcInventory Document " groupName="Group1" 
-                                        visibleInFilterBar="true">
-						<fb:control>
-						<MultiComboBox  name="Inventory Document " selectionChange=".onSelectionChange"
-										items="{ path: '/ProductSuppliers', templateShareable: true }">
-										<core:Item key="{key}" text="{name}"/>
-						</MultiComboBox>
-						</fb:control>
-		            </fb:FilterGroupItem> -->
 		</fb:filterGroupItems>
         </fb:FilterBar>
 	    </f:content>

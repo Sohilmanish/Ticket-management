@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog
+		id="selectDialogAssigned"
+		title="List of Assigned People"
+		items="{P>/}"
+		search=".onValueHelpSearchAssignedTo"
+		confirm=".onValueHelpCloseAssignedTo"
+		cancel=".onValueHelpCloseAssignedTo">
+		<StandardListItem
+			icon="{ProductPicUrl}"
+			iconDensityAware="false"
+			iconInset="false"
+			title="{P>AssignedTo}"
+			description="{P>AssignedTo}" />
+	</SelectDialog>
+</core:FragmentDefinition>
+

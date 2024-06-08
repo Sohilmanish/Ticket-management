@@ -146,15 +146,16 @@ function (Controller,JSONModel,Fragment,Filter) {
 
             let oModel= new JSONModel()
             oModel.setData(oData)
-            this.getView().byId("Idtable").setModel(oModel,"P")
+            this.getView().setModel(oModel,"P")
+            
         },
          
-        onValueHelpRequest: function (oEvent) {
+        onValueHelpRequestTicket: function (oEvent) {
           var sInputValue = oEvent.getSource().getValue(),
             oView = this.getView();
     
-          if (!this._pValueHelpDialog) {
-            this._pValueHelpDialog = Fragment.load({
+          if (!this._pValueHelpDialog1) {
+            this._pValueHelpDialog1 = Fragment.load({
               id: oView.getId(),
               name: "com.manish.ticketmanagement.view.TicketId",
               controller: this
@@ -163,6 +164,29 @@ function (Controller,JSONModel,Fragment,Filter) {
               return oDialog;
             });
           }
+
+          this._pValueHelpDialog1.then(function(oDialog) {
+            // Create a filter for the binding
+            // oDialog.getBinding("items").filter([new Filter("Name", FilterOperator.Contains, sInputValue)]);
+            // Open ValueHelpDialog filtered by the input's value
+            oDialog.open(sInputValue);
+          });
+        },
+        
+        onValueHelpRequestAssignedTo: function (oEvent) {
+          var sInputValue = oEvent.getSource().getValue(),
+            oView = this.getView();
+    
+          if (!this._pValueHelpDialog) {
+            this._pValueHelpDialog = Fragment.load({
+              id: oView.getId(),
+              name: "com.manish.ticketmanagement.view.assignedTo",
+              controller: this
+            }).then(function (oDialog) {
+              oView.addDependent(oDialog);
+              return oDialog;
+            }); 
+          }
           this._pValueHelpDialog.then(function(oDialog) {
             // Create a filter for the binding
             // oDialog.getBinding("items").filter([new Filter("Name", FilterOperator.Contains, sInputValue)]);
@@ -170,7 +194,26 @@ function (Controller,JSONModel,Fragment,Filter) {
             oDialog.open(sInputValue);
           });
         },
-        	
+
+        onValueHelpCloseTicket: function (oEvent) {
+          var oSelectedItem = oEvent.getParameter("selectedItem");
+          oEvent.getSource().getBinding("items").filter([]);
+    
+          if (!oSelectedItem) {
+            return;
+          }
+          this.byId("TicketID").setValue(oSelectedItem.getTitle());
+        },
+
+        onValueHelpCloseAssignedTo: function (oEvent) {
+          var oSelectedItem = oEvent.getParameter("selectedItem");
+          oEvent.getSource().getBinding("items").filter([]);
+    
+          if (!oSelectedItem) {
+            return;
+          }
+          this.byId("AssignedTo").setValue(oSelectedItem.getTitle());
+        }
         
 
     });

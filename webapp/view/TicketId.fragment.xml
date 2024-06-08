@@ -1,33 +1,17 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
 	<SelectDialog
-		id="selectDialog"
-		title="Products"
-		items="{/ProductCollection}"
-		search=".onValueHelpSearch"
-		confirm=".onValueHelpClose"
-		cancel=".onValueHelpClose">
+		id="selectDialogTicket"
+		title="Select Ticket ID"
+		items="{P>/}"
+		search=".onValueHelpSearchTicket"
+		confirm=".onValueHelpCloseTicket"
+		cancel=".onValueHelpCloseTicket">
 		<StandardListItem
 			icon="{ProductPicUrl}"
 			iconDensityAware="false"
 			iconInset="false"
-			title="{Name}"
-			description="{ProductId}" />
+			title="{P>TicketID}"
+			description="{P>TicketID}" />
 	</SelectDialog>
 </core:FragmentDefinition>
 
-<!-- <core:FragmentDefinition
-  xmlns="sap.m"
-  xmlns:core="sap.ui.core">
-  <Dialog
-    id="dialog"
-    title="Info" type="Message">
-      <content>
-        <Text text="Customer data is later saved via an OData service."/>
-      </content>
-      <beginButton>
-        <Button
-          text="Ok"
-          press=".onCloseDialog"/>
-      </beginButton>
-  </Dialog>
-</core:FragmentDefinition> -->
