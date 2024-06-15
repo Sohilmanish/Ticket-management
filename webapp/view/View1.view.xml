@@ -59,10 +59,24 @@
 					<fb:FilterGroupItem name="Status" label="Status" groupName="Group1" 
                                         visibleInFilterBar="true">
 						<fb:control>
-						<MultiComboBox  name="Status" selectionChange=".onSelectionChange"
+						<Select
+						enabled="{/Enabled}"
+						editable="{/Editable}"
+						forceSelection="false"
+						selectedKey="text"
+						>
+							<core:ListItem  text="Yes" />
+							<core:ListItem  text="No" />
+						</Select>
+						<!-- <MultiComboBox  name="Status" selectionChange=".onSelectionChange"
 										items="{ path: '/ProductCategories',templateShareable: true}">
 										<core:Item key="{key}" text="{name}"/>
-						</MultiComboBox>
+										<core:Item key="high" text="high"/>
+										<core:Item key="verry_high" text="verry high"/>
+										<core:Item key="medium" text="medium"/>
+										<core:Item key="low" text="low"/>
+										<core:Item key="verry_low" text="verry low"/>
+						</MultiComboBox> -->
 						</fb:control>
 				    </fb:FilterGroupItem>
 					<fb:FilterGroupItem name="Ticket ID" label="TicketID" groupName="Group1" 
