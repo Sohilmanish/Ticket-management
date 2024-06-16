@@ -217,52 +217,26 @@ function (Controller,JSONModel,Fragment,Filter,FilterOperator) {
         },
 
         onSearch: function () {
-          var aTableFilters = this.byId("filterbar").getFilterGroupItems().reduce(function (aResult, oFilterGroupItem) {
-            var oControl = oFilterGroupItem.getControl(),
-              aSelectedKeys = oControl.getSelectedKeys(),
-              aFilters = aSelectedKeys.map(function (sSelectedKey) {
-                return new Filter({
-                  path: oFilterGroupItem.getName(),
-                  operator: FilterOperator.Contains,
-                  value1: sSelectedKey
-                });
-              });
-    
-            if (aSelectedKeys.length > 0) {
-              aResult.push(new Filter({
-                filters: aFilters,
-                and: false
-              }));
-            }
-    
-            return aResult;
-          }, []);
-    
-          this.oTable.getBinding("items").filter(aTableFilters);
-          this.oTable.setShowOverlay(false);
-        },
+          const oTable = this.byId('Idtable')
 
-        getFiltersWithValues: function () {
-          var aFiltersWithValue = this.oFilterBar.getFilterGroupItems().reduce(function (aResult, oFilterGroupItem) {
-            var oControl = oFilterGroupItem.getControl();
-    
-            if (oControl && oControl.getSelectedKeys && oControl.getSelectedKeys().length > 0) {
-              aResult.push(oFilterGroupItem);
-            }
-    
-            return aResult;
-          }, []);
-    
-          return aFiltersWithValue;
-        },
+          let ticketID = this.byId('TicketID').getValue() 
 
-        applyData: function (aData) {
-          aData.forEach(function (oDataObject) {
-            var oControl = this.oFilterBar.determineControlByName(oDataObject.fieldName, oDataObject.groupName);
-            oControl.setSelectedKeys(oDataObject.fieldData);
-          }, this);
-        },
-        
+          let oFilter =  new Filter({
+            path: 'TicketID',
+            operator: FilterOperator.EQ,
+            value1: ticketID
+          });
+
+          const aFilter = new Filter([oFilter], true);
+
+         if(ticketID) {
+            this.byId("Idtable").getBinding().filter(aFilter, "Application");
+         } else {
+          this.byId("Idtable").getBinding().filter(null, "Application");
+         }
+
+ 
+        }
 
     });
 });
