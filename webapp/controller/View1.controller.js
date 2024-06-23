@@ -178,8 +178,8 @@ function (Controller,JSONModel,Fragment,Filter,FilterOperator) {
           var sInputValue = oEvent.getSource().getValue(),
             oView = this.getView();
     
-          if (!this._pValueHelpDialog) {
-            this._pValueHelpDialog = Fragment.load({
+          if (!this._pValueHelpDialog2) {
+            this._pValueHelpDialog2 = Fragment.load({
               id: oView.getId(),
               name: "com.manish.ticketmanagement.view.assignedTo",
               controller: this
@@ -188,7 +188,7 @@ function (Controller,JSONModel,Fragment,Filter,FilterOperator) {
               return oDialog;
             }); 
           }
-          this._pValueHelpDialog.then(function(oDialog) {
+          this._pValueHelpDialog2.then(function(oDialog) {
             // Create a filter for the binding
             // oDialog.getBinding("items").filter([new Filter("Name", FilterOperator.Contains, sInputValue)]);
             // Open ValueHelpDialog filtered by the input's value
@@ -226,17 +226,13 @@ function (Controller,JSONModel,Fragment,Filter,FilterOperator) {
             operator: FilterOperator.EQ,
             value1: ticketID
           });
-
-          const aFilter = new Filter([oFilter], true);
-
+         const aFilter = new Filter([oFilter], true);
          if(ticketID) {
             this.byId("Idtable").getBinding().filter(aFilter, "Application");
          } else {
           this.byId("Idtable").getBinding().filter(null, "Application");
          }
-
- 
-        }
+       }
 
     });
 });
